@@ -2,7 +2,7 @@
 <html lang="ml">
 <head>
   <meta charset="UTF-8">
-  <title>കാവൽക്കാരൻ ❓ Q&A</title>
+  <title>Kavalkaran ❓ Q&A | ENGLISH</title>
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
  <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam&display=swap" rel="stylesheet">
@@ -45,12 +45,12 @@
   </style>
 </head>
 <body>
-  <h1>❓ കാവൽക്കാരന്റെ ചോദ്യം - ഉത്തരങ്ങൾ</h1>
+  <h1>❓ Kavalkaran Question - Answers</h1>
   <div style="margin-bottom: 20px; text-align: center;">
   <input 
     type="text" 
     id="searchBox" 
-    placeholder="🔍 ഒരു ചോദ്യം അന്വേഷിക്കുക..." 
+    placeholder="🔍 Find A Question..." 
     style="
       padding: 12px 16px;
       width: 90%;
@@ -66,7 +66,7 @@
   >
 </div>
 
-  <div id="qa-container">ചെയ്യുന്നു...</div>
+  <div id="qa-container">Loading...</div>
 <script>
   document.getElementById('searchBox').addEventListener('input', function() {
     const query = this.value.toLowerCase();
@@ -107,7 +107,7 @@
         });
       })
       .catch(error => {
-        document.getElementById('qa-container').innerHTML = 'ഡാറ്റ വായിക്കാനായില്ല: ' + error;
+        document.getElementById('qa-container').innerHTML = 'Data could not be read: ' + error;
         console.error('JSON loading failed:', error);
       });
   </script>
