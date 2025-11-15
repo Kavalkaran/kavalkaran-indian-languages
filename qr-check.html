@@ -2,148 +2,179 @@
 <html lang="ml">
 <head>
   <meta charset="UTF-8">
-  <title>QR കോഡ് പരിശോധകൻ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔒Safe file vault | English</title>
   <link rel="manifest" href="manifest.json">
-  <script src="https://unpkg.com/html5-qrcode"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <style>
-    body {
-      background: #0f172a;
-      color: white;
-      font-family: 'Noto Sans Malayalam', sans-serif;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-    }
-    #reader {
-      width: 100%;
-      max-width: 400px;
-      margin: auto;
-    }
-    #result {
-      background: #1e293b;
-      padding: 15px;
-      border-radius: 10px;
-      margin-top: 20px;
-      word-wrap: break-word;
-    }
-    input[type="file"] {
-      margin-top: 15px;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    iframe {
-      margin-top: 15px;
-      border: 2px solid #334155;
-      border-radius: 10px;
-    }
-    .safe { color: #10b981; }
-    .danger { color: #ef4444; }
-    .warning { color: #facc15; }
-    .qr-type-box {
-      background: #334155;
-      padding: 10px;
-      border-radius: 10px;
-      margin-top: 10px;
-      font-size: 1.2em;
-      display: inline-block;
-    }
+    body { font-family: sans-serif; background: #111; color: #eee; padding: 2rem; }
+    h1 { text-align: center; color: #0f0; }
+    input, button { margin: 0.5rem 0; padding: 0.5rem; font-size: 1rem; }
+    ul { list-style: none; padding: 0; }
+    li { background: #222; margin: 0.3rem 0; padding: 0.5rem; border: 1px solid #555; }
+    a { color: #0af; }
   </style>
 </head>
 <body>
-  <h1>QR കോഡ് പരിശോധകൻ</h1>
+  <h1>🔒 Safe file vault</h1>
 
-  <div id="reader"></div>
+  <input type="file" id="fileInput" />
+  <input type="password" id="passwordInput" placeholder="Enter password" />
+  <button onclick="encryptAndStore()">UPLOAD</button>
+  <button onclick="tryFingerprint()">USE Finger print</button>
 
-  <input type="file" accept="image/*" id="file-input">
-  
-  <div id="result">QR വിവരങ്ങൾ ഇവിടെ കാണും...</div>
-  <div id="preview"></div>
+  <h2>📁 Saved Files</h2>
+  <ul id="fileList"></ul>
 
   <script>
-    const resultEl = document.getElementById("result");
-    const previewEl = document.getElementById("preview");
+    const dbName = "secureVault";
+    const storeName = "files";
+    let db;
 
-    function analyzeData(data) {
-      const lower = data.toLowerCase();
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
 
-      let type = "അജ്ഞാതം";
-      if (lower.startsWith("http://") || lower.startsWith("https://")) {
-        type = "🌐 ലിങ്ക്";
-      } else if (lower.startsWith("upi://")) {
-        type = "💸 പേയ്‌മെന്റ് QR";
-      } else if (lower.endsWith(".pdf") || lower.endsWith(".docx") || lower.endsWith(".zip") || lower.endsWith(".apk") || lower.endsWith(".exe")) {
-        type = "📁 ഫയൽ ഡൗൺലോഡ്";
-      } else if (lower.startsWith("mailto:")) {
-        type = "📧 ഇമെയിൽ ലിങ്ക്";
-      } else if (lower.startsWith("tel:")) {
-        type = "📞 ഫോൺ നമ്പർ";
-      } else {
-        type = "📝 സാധാരണ ടെക്സ്റ്റ്";
-      }
+    const request = indexedDB.open(dbName, 1);
+    request.onupgradeneeded = event => {
+      db = event.target.result;
+      db.createObjectStore(storeName, { keyPath: "id" });
+    };
+    request.onsuccess = event => {
+      db = event.target.result;
+      listFiles();
+    };
 
-      let warning = "";
-      if (lower.includes('bit.ly') || lower.includes('tinyurl') || lower.includes('redirect')) {
-        warning = '<p class="warning">⚠️ ചുരുക്കിയ ലിങ്ക് – ശ്രദ്ധിക്കണം.</p>';
-      } else if (lower.match(/\.exe|\.apk|\.bat/)) {
-        warning = '<p class="danger">🛑 അപകടകരമായ ഫയൽ ലിങ്ക്!</p>';
-      } else if (lower.startsWith('http://') || lower.startsWith('https://')) {
-        warning = '<p class="safe">🔗 സാധാരണ ലിങ്ക് – സന്ദർശിക്കുമ്പോൾ ജാഗ്രത പാലിക്കുക.</p>';
-      } else {
-        warning = '<p class="safe">✅ സാധാരണ ഡാറ്റ.</p>';
-      }
-
-      return `<div class="qr-type-box"><strong>QR കോഡ് തരം:</strong> ${type}</div>${warning}`;
+    async function sha256(message) {
+      const data = encoder.encode(message);
+      const hash = await crypto.subtle.digest("SHA-256", data);
+      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, "0")).join("");
     }
 
-    function showResult(decodedText) {
-      resultEl.innerHTML = `<strong>QR കണ്ടെത്തിയത്:</strong><br>${decodedText}<br>${analyzeData(decodedText)}`;
-      
-      if (decodedText.startsWith('http://') || decodedText.startsWith('https://')) {
-        previewEl.innerHTML = `
-          <h3>🌐 വെബ്സൈറ്റ് പ്രിവ്യൂ:</h3>
-          <iframe src="${decodedText}" 
-                  width="100%" 
-                  height="400" 
-                  sandbox="allow-same-origin allow-forms allow-popups">
-          </iframe>`;
-      } else {
-        previewEl.innerHTML = '';
-      }
+    async function encryptData(password, data) {
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const keyMaterial = await crypto.subtle.importKey("raw", encoder.encode(password), { name: "PBKDF2" }, false, ["deriveKey"]);
+      const key = await crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" },
+        keyMaterial,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["encrypt"]
+      );
+      const encrypted = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, data);
+      return { encrypted, iv, salt };
     }
 
-    // Start QR Scanner from Camera
-    const html5QrCode = new Html5Qrcode("reader");
-    Html5Qrcode.getCameras().then(cameras => {
-      if (cameras && cameras.length) {
-        html5QrCode.start(
-          { facingMode: "environment" }, 
-          { fps: 10, qrbox: 250 },
-          decodedText => {
-            html5QrCode.stop();
-            showResult(decodedText);
-          }
-        ).catch(err => {
-          resultEl.innerHTML = `<p class="danger">😢 ക്യാമറ പ്രവർത്തിക്കുന്നില്ല</p>`;
-        });
-      }
-    });
+    async function decryptData(password, encrypted, iv, salt) {
+      const keyMaterial = await crypto.subtle.importKey("raw", encoder.encode(password), { name: "PBKDF2" }, false, ["deriveKey"]);
+      const key = await crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" },
+        keyMaterial,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["decrypt"]
+      );
+      return await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, encrypted);
+    }
 
-    // File Upload Scanner
-    document.getElementById("file-input").addEventListener("change", async e => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        html5QrCode.scanFile(file, true)
-          .then(decodedText => showResult(decodedText))
-          .catch(err => resultEl.innerHTML = `<span class="danger">⚠️ സ്കാൻ ചെയ്യാനായില്ല: QR കണ്ടെത്തിയില്ല</span>`);
+    async function encryptAndStore() {
+      const file = fileInput.files[0];
+      const password = passwordInput.value;
+      if (!file || !password) return alert("Please give a File and Password.");
+
+      const arrayBuffer = await file.arrayBuffer();
+      const { encrypted, iv, salt } = await encryptData(password, arrayBuffer);
+      const nameHash = await sha256(file.name + password);
+      const fileRecord = {
+        id: Date.now().toString(),
+        name: btoa(nameHash),
+        encrypted,
+        iv: Array.from(iv),
+        salt: Array.from(salt),
+        originalName: file.name
       };
-      reader.readAsDataURL(file);
-    });
+      const tx = db.transaction([storeName], "readwrite");
+      tx.objectStore(storeName).add(fileRecord).onsuccess = () => {
+        alert("✅ File saved securely!");
+        listFiles();
+      };
+    }
+
+    function listFiles() {
+      const ul = document.getElementById("fileList");
+      ul.innerHTML = "";
+      const tx = db.transaction([storeName], "readonly");
+      tx.objectStore(storeName).getAll().onsuccess = event => {
+        event.target.result.forEach(file => {
+          const li = document.createElement("li");
+
+          const decryptBtn = document.createElement("button");
+          decryptBtn.textContent = "🔓 Open";
+          decryptBtn.onclick = () => decryptFile(file);
+
+          const deleteBtn = document.createElement("button");
+          deleteBtn.textContent = "🗑️ Delete";
+          deleteBtn.style.marginLeft = "1rem";
+          deleteBtn.onclick = () => deleteFile(file);
+
+          li.innerHTML = `<br/><strong>Filename:</strong> ${file.originalName} `;
+          li.appendChild(decryptBtn);
+          li.appendChild(deleteBtn);
+          ul.appendChild(li);
+        });
+      };
+    }
+
+    async function decryptFile(file) {
+      const password = prompt("Please Enter password For open the File");
+      if (!password) return;
+
+      try {
+        const encryptedData = file.encrypted instanceof ArrayBuffer
+          ? file.encrypted
+          : new Uint8Array(Object.values(file.encrypted)).buffer;
+
+        const decrypted = await decryptData(
+          password,
+          encryptedData,
+          new Uint8Array(file.iv),
+          new Uint8Array(file.salt)
+        );
+
+        const blob = new Blob([decrypted]);
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = file.originalName;
+        a.click();
+      } catch (e) {
+        alert("❌ Wrong password.");
+        console.error(e);
+      }
+    }
+
+    async function deleteFile(file) {
+      const password = prompt("Enter password for Deleting:");
+      if (!password) return;
+
+      try {
+        const encryptedData = file.encrypted instanceof ArrayBuffer
+          ? file.encrypted
+          : new Uint8Array(Object.values(file.encrypted)).buffer;
+
+        await decryptData(password, encryptedData, new Uint8Array(file.iv), new Uint8Array(file.salt));
+        const tx = db.transaction([storeName], "readwrite");
+        tx.objectStore(storeName).delete(file.id).onsuccess = () => {
+          alert("🗑️ File Deleted!");
+          listFiles();
+        };
+      } catch (e) {
+        alert("❌ Wrong password.");
+      }
+    }
+
+    function tryFingerprint() {
+      alert("🤚 Finger print Feature only in Paid version");
+    }
   </script>
 </body>
 </html>
