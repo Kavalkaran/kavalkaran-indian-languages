@@ -2,7 +2,7 @@
 <html lang="ml">
 <head>
   <meta charset="UTF-8">
-  <title>സുരക്ഷിത ഫയൽ വാൾട്ട്</title>
+  <title>🔒Safe file vault | English</title>
   <link rel="manifest" href="manifest.json">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <style>
@@ -15,14 +15,14 @@
   </style>
 </head>
 <body>
-  <h1>🔒 സുരക്ഷിത ഫയൽ വാൾട്ട്</h1>
+  <h1>🔒 Safe file vault</h1>
 
   <input type="file" id="fileInput" />
-  <input type="password" id="passwordInput" placeholder="പാസ്‌വേഡ് നൽകുക" />
-  <button onclick="encryptAndStore()">സുരക്ഷിതമായി അപ്‌ലോഡ് ചെയ്യുക</button>
-  <button onclick="tryFingerprint()">ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക</button>
+  <input type="password" id="passwordInput" placeholder="Enter password" />
+  <button onclick="encryptAndStore()">UPLOAD</button>
+  <button onclick="tryFingerprint()">USE Finger print</button>
 
-  <h2>📁 സംഭരിച്ച ഫയലുകൾ</h2>
+  <h2>📁 Saved Files</h2>
   <ul id="fileList"></ul>
 
   <script>
@@ -79,7 +79,7 @@
     async function encryptAndStore() {
       const file = fileInput.files[0];
       const password = passwordInput.value;
-      if (!file || !password) return alert("ഒരു ഫയലും പാസ്‌വേഡും നൽകുക.");
+      if (!file || !password) return alert("Please give a File and Password.");
 
       const arrayBuffer = await file.arrayBuffer();
       const { encrypted, iv, salt } = await encryptData(password, arrayBuffer);
@@ -94,7 +94,7 @@
       };
       const tx = db.transaction([storeName], "readwrite");
       tx.objectStore(storeName).add(fileRecord).onsuccess = () => {
-        alert("✅ ഫയൽ സുരക്ഷിതമായി സംഭരിച്ചു!");
+        alert("✅ File saved securely!");
         listFiles();
       };
     }
@@ -108,15 +108,15 @@
           const li = document.createElement("li");
 
           const decryptBtn = document.createElement("button");
-          decryptBtn.textContent = "🔓 തുറക്കുക....";
+          decryptBtn.textContent = "🔓 Open";
           decryptBtn.onclick = () => decryptFile(file);
 
           const deleteBtn = document.createElement("button");
-          deleteBtn.textContent = "🗑️ ഫയൽ ഡിലീറ്റ് ചെയ്യുക";
+          deleteBtn.textContent = "🗑️ Delete";
           deleteBtn.style.marginLeft = "1rem";
           deleteBtn.onclick = () => deleteFile(file);
 
-          li.innerHTML = `<br/><strong>യഥാർത്ഥം:</strong> ${file.originalName} `;
+          li.innerHTML = `<br/><strong>Filename:</strong> ${file.originalName} `;
           li.appendChild(decryptBtn);
           li.appendChild(deleteBtn);
           ul.appendChild(li);
@@ -125,7 +125,7 @@
     }
 
     async function decryptFile(file) {
-      const password = prompt("ഡീക്രിപ്റ്റ് ചെയ്യാൻ പാസ്‌വേഡ് നൽകുക:");
+      const password = prompt("Please Enter password For open the File");
       if (!password) return;
 
       try {
@@ -147,13 +147,13 @@
         a.download = file.originalName;
         a.click();
       } catch (e) {
-        alert("❌ തെറ്റായ പാസ്‌വേഡ് അല്ലെങ്കിൽ ഡീക്രിപ്ഷൻ പരാജയപ്പെട്ടു.");
+        alert("❌ Wrong password.");
         console.error(e);
       }
     }
 
     async function deleteFile(file) {
-      const password = prompt("ഫയൽ മായ്ക്കാൻ പാസ്‌വേഡ് നൽകുക:");
+      const password = prompt("Enter password for Deleting:");
       if (!password) return;
 
       try {
@@ -164,16 +164,16 @@
         await decryptData(password, encryptedData, new Uint8Array(file.iv), new Uint8Array(file.salt));
         const tx = db.transaction([storeName], "readwrite");
         tx.objectStore(storeName).delete(file.id).onsuccess = () => {
-          alert("🗑️ ഫയൽ വിജയകരമായി ഡിലീറ്റ് ചെയ്തു!");
+          alert("🗑️ File Deleted!");
           listFiles();
         };
       } catch (e) {
-        alert("❌ തെറ്റായ പാസ്‌വേഡ്! ഫയൽ ഡിലീറ്റ് ചെയ്യാൻ കഴിയില്ല.");
+        alert("❌ Wrong password.");
       }
     }
 
     function tryFingerprint() {
-      alert("🤚 ഫിംഗർപ്രിന്റ് പിന്തുണ ഇപ്പോൾ ലഭ്യമല്ല. WebAuthn API ഉപയോഗിച്ച് ഇത് ചേർക്കാം!");
+      alert("🤚 Finger print Feature only in Paid version");
     }
   </script>
 </body>
