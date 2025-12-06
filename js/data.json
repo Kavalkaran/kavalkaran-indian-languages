@@ -34,7 +34,7 @@
   {
     "question": "What is the Dark Web? Why is it advised not to visit?",
     "answer": "Dark Web works on the TOR browser. It contains leaked data, hacked information, and illegal items. Much of it is monitored."
-  ],
+  },
   {
     "question": "What happens if you click malicious websites?",
     "answer": "Some websites may perform auto-downloads, credential stealing, or session hijacking. Do not open untrusted websites."
