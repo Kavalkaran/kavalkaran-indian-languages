@@ -42,5 +42,166 @@
   {
     "question": "Can hacking happen through QR codes?",
     "answer": "Yes. A QR code can lead to a malicious link. It may perform HTML attacks/XSS or browser hijacking. Always verify the URL before scanning."
+  },
+  {
+    "question": "What is Cyber Crime?",
+    "answer": "Crimes committed using computers, networks, or mobile devices."
+  },
+  {
+    "question": "Why do we need Cyber Law?",
+    "answer": "To prevent online misuse and punish cyber criminals."
+  },
+  {
+    "question": "What is Hacking?",
+    "answer": "Accessing someone else's system or account without permission."
+  },
+  {
+    "question": "What is a Computer Virus?",
+    "answer": "A program that replicates itself and damages computer systems."
+  },
+  {
+    "question": "What does a Trojan Horse do?",
+    "answer": "Pretends to be a normal program but secretly performs harmful actions."
+  },
+  {
+    "question": "What is a Worm?",
+    "answer": "A self-replicating virus that spreads across networks and affects systems."
+  },
+  {
+    "question": "Why are Firewalls used?",
+    "answer": "To block unwanted internet traffic and protect networks."
+  },
+  {
+    "question": "What is Encryption?",
+    "answer": "Converting data into unreadable code to keep it secure."
+  },
+  {
+    "question": "What is Decryption?",
+    "answer": "Converting encrypted data back into readable form."
+  },
+  {
+    "question": "What is Pharming?",
+    "answer": "Redirecting users from real websites to fake ones secretly."
+  },
+  {
+    "question": "What is Cyber Stalking?",
+    "answer": "Threatening or continuously following someone online."
+  },
+  {
+    "question": "What is a Keylogger?",
+    "answer": "Malicious software that records keystrokes typed on a keyboard."
+  },
+  {
+    "question": "What is a Botnet?",
+    "answer": "A network of infected computers controlled by hackers."
+  },
+  {
+    "question": "What is a DDoS Attack?",
+    "answer": "Making a website unavailable by flooding it with massive traffic."
+  },
+  {
+    "question": "What is Identity Theft?",
+    "answer": "Stealing someone's personal information for fraud."
+  },
+  {
+    "question": "Why is Cyber Forensics used?",
+    "answer": "To investigate cyber crimes and collect evidence."
+  },
+  {
+    "question": "Why delete Cookies?",
+    "answer": "To protect privacy and avoid unwanted tracking."
+  },
+  {
+    "question": "How does Incognito Mode help?",
+    "answer": "Prevents saving browsing history, cookies, and cache."
+  },
+  {
+    "question": "What is the Dark Web?",
+    "answer": "A hidden part of the internet not accessible through normal search engines."
+  },
+  {
+    "question": "What is Cyber Ethics?",
+    "answer": "Rules for behaving ethically and responsibly online."
+  },
+  {
+    "question": "How to prevent Cyber Bullying?",
+    "answer": "Save evidence, report, block the abuser."
+  },
+  {
+    "question": "What is Data Mining?",
+    "answer": "Process of extracting useful information from large data."
+  },
+  {
+    "question": "How to remove Spyware?",
+    "answer": "Use anti-spyware tools and avoid opening suspicious files."
+  },
+  {
+    "question": "How to identify Fake Apps?",
+    "answer": "Check reviews, developer name, and requested permissions."
+  },
+  {
+    "question": "What is Cyber Grooming?",
+    "answer": "Tricking children online to build fake relationships for harmful intent."
+  },
+  {
+    "question": "What is an OTP?",
+    "answer": "A one-time password used for security verification."
+  },
+  {
+    "question": "How does Cloud Hacking happen?",
+    "answer": "Weak passwords, faulty servers, or phishing attacks."
+  },
+  {
+    "question": "What is Adware?",
+    "answer": "Software that displays unwanted advertisements."
+  },
+  {
+    "question": "What is a Social Engineering Attack?",
+    "answer": "Manipulating people psychologically to steal information."
+  },
+  {
+    "question": "What is a QR Code Scam?",
+    "answer": "Stealing data by scanning fake QR codes."
+  },
+  {
+    "question": "Why is Captcha used?",
+    "answer": "To verify that the user is a real human, not a bot."
+  },
+  {
+    "question": "What are the benefits of a Password Manager?",
+    "answer": "It stores all passwords securely in one place."
+  },
+  {
+    "question": "Who is an Ethical Hacker?",
+    "answer": "A cybersecurity expert who legally finds security weaknesses."
+  },
+  {
+    "question": "How to prevent Ransomware?",
+    "answer": "Keep backups and avoid clicking suspicious links."
+  },
+  {
+    "question": "What cyber risks exist in Online Gaming?",
+    "answer": "Fraud, data theft through chat, and malware downloads."
+  },
+  {
+    "question": "What is a Digital Footprint?",
+    "answer": "The trace of activities you leave online."
+  },
+  {
+    "question": "Is using a VPN safe?",
+    "answer": "Yes, if you use a trusted VPN."
+  },
+  {
+    "question": "Why do we need Cyber Literacy?",
+    "answer": "To understand the digital world and use it safely."
+  },
+  {
+    "question": "How to identify Fake Caller Apps?",
+    "answer": "Check permissions, ratings, and developer details."
+  },
+  {
+    "question": "What is the basic rule of Cyber Safety?",
+    "answer": "Never trust suspicious links, files, or strangers—always think before you click."
   }
+
 ]
