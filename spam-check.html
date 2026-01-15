@@ -161,5 +161,21 @@
       }
     }
   </script>
+    <script>
+  // Prefill URL input if query parameter exists
+function getQueryParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
+const prefillUrl = getQueryParam('url');
+if (prefillUrl) {
+  const urlInput = document.getElementById('urlInput');
+  urlInput.value = decodeURIComponent(prefillUrl);
+  // Optionally auto-run the check
+  document.getElementById('checkBtn').click();
+}
+
+</script>
 </body>
 </html>
