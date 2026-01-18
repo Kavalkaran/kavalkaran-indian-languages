@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>📋 KAVALKARAN FEEDBACK PORTAL</title>
   <link rel="manifest" href="manifest.json">
+  <meta name="google" content="notranslate">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <style>
     body {
@@ -39,6 +41,54 @@
     src="https://docs.google.com/forms/d/e/1FAIpQLSdXfIUO__UMGuf-kDdZhjjQzG-_l4deuPegL7u9LzxRHKFYxQ/viewform?embedded=true" 
     allowfullscreen>
   </iframe>
+
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement(
+    {
+      pageLanguage: 'ml',
+      includedLanguages: 'en,hi,as,bn,brx,doi,gu,kn,ks,gom,mai,ml,mni,mr,ne,or,pa,sa,sat,sd,ta,te,ur',
+      autoDisplay: false,
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    },
+    'google_translate_element'
+  );
+
+  applyLangFromURL();
+}
+
+/* 📌 Read ?lang=hi */
+function applyLangFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get('lang');
+
+  if (!lang) return;
+
+  setTimeout(() => {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event('change'));
+    }
+  }, 1200);
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<div id="google_translate_container"
+     style="
+       position: fixed;
+       top: 14px;
+       right: 14px;
+       z-index: 9999;
+       background: #1e293b;
+       padding: 6px 10px;
+       border-radius: 10px;
+       box-shadow: 0 4px 12px rgba(0,0,0,.35);
+     ">
+  <div id="google_translate_element"></div>
+</div>
 </body>
 </html>
 

@@ -5,6 +5,8 @@
   <title>🔐 Kavalkaran Link scanner | English </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="manifest.json">
+  
+  <meta name="google" content="notranslate">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam&display=swap" rel="stylesheet">
   <style>
     body {
@@ -45,6 +47,21 @@
   </style>
 </head>
 <body>
+<div id="google_translate_container"
+     style="
+       position: fixed;
+       top: 14px;
+       right: 14px;
+       z-index: 9999;
+       background: #1e293b;
+       padding: 6px 10px;
+       border-radius: 10px;
+       box-shadow: 0 4px 12px rgba(0,0,0,.35);
+     ">
+  <div id="google_translate_element"></div>
+</div>
+
+
   <h1>🌐 Kavalkaran Link scanner</h1>
   <p>Enter link Here : </p>
   <input id="urlInput" placeholder="Example: https://bit.ly/xyz">
@@ -177,5 +194,40 @@ if (prefillUrl) {
 }
 
 </script>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement(
+    {
+      pageLanguage: 'ml',
+      includedLanguages: 'en,hi,as,bn,brx,doi,gu,kn,ks,gom,mai,ml,mni,mr,ne,or,pa,sa,sat,sd,ta,te,ur',
+      autoDisplay: false,
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    },
+    'google_translate_element'
+  );
+
+  applyLangFromURL();
+}
+
+/* 📌 Read ?lang=hi */
+function applyLangFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get('lang');
+
+  if (!lang) return;
+
+  setTimeout(() => {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event('change'));
+    }
+  }, 1200);
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
