@@ -1,137 +1,324 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#1f2937" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="shortcut icon" href="icon/favicon.ico" type="image/x-icon">
-  <meta name="google" content="notranslate">
-  <title>KAVALKARAN DASHBOARD | ENGLISH</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1f2937">
+
+<link rel="manifest" href="manifest.json">
+<link rel="shortcut icon" href="icon/favicon.ico">
+<meta name="google" content="notranslate">
+
+<title>KAVALKARAN | All INDIAN LANGUAGES | HINDI | TAMIL | KANNADA | ALL INDIAN LANGAUGES AVAILABLE </title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* MOBILE FIRST */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Noto Sans',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+padding:18px;
+}
+
+/* HEADER */
+
+header{
+text-align:center;
+margin-bottom:30px;
+}
+
+header h1{
+color:#22d3ee;
+font-size:26px;
+text-shadow:0 0 12px rgba(34,211,238,0.6);
+}
+
+header p{
+font-size:14px;
+color:#94a3b8;
+margin-top:6px;
+}
+
+/* MENU */
+
+.menu{
+display:flex;
+flex-direction:column;
+gap:14px;
+max-width:520px;
+margin:auto;
+}
+
+.menu a{
+text-decoration:none;
+}
+
+.menu-item{
+display:flex;
+align-items:center;
+gap:14px;
+background:#1e293b;
+padding:18px;
+border-radius:16px;
+border:1px solid transparent;
+transition:all .2s ease;
+box-shadow:0 6px 14px rgba(0,0,0,0.25);
+}
+
+.menu-item:hover{
+border-color:#22d3ee;
+transform:translateY(-2px);
+}
+
+.menu-item:active{
+transform:scale(0.97);
+background:#334155;
+}
+
+/* ICON */
+
+.menu-item svg{
+width:24px;
+height:24px;
+stroke:#22d3ee;
+flex-shrink:0;
+}
+
+/* TEXT */
+
+.menu-item span{
+font-size:16px;
+font-weight:500;
+color:white;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+margin-top:35px;
+font-size:13px;
+color:#94a3b8;
+}
+
+/* DESKTOP */
+
+@media(min-width:700px){
+
+header h1{
+font-size:30px;
+}
+
+.menu-item span{
+font-size:17px;
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
-  <header>
-    <h1><span class="notranslate">👮‍♂️KAVALKARAN</span></h1>
-    <p style="color: black;">THE TOMORROW'S GUARDIAN</p>
-  </header>
 
-  <main>
-    <section class="feature">
-      <h2>📊 Secure File Vault</h2>
-       <a href="file-protect.html"><button>OPEN....</button>
-    </a>
-    </section>
+<header>
+<h1 class="notranslate">KAVALKARAN</h1>
+<p>Your Simple Cyber Safety Helper</p>
+</header>
 
-    <section class="feature">
-      <h2>🔐 Link check </h2>
-       <a href="spam-check.html"><button>OPEN....</button>
-    </a>
-     </section>
+<div class="menu">
 
-    <section class="feature">
-      <h2>🧠  QR Code Checker</h2>
-       <a hreF="qr-check.html"><button>OPEN....</button>
-    </a>
-    </section>
+<a href="file-protect.html">
+<div class="menu-item">
+<svg fill="none" stroke-width="2" viewBox="0 0 24 24">
+<path d="M12 3l8 4v5c0 5-3 8-8 9-5-1-8-4-8-9V7z"/>
+</svg>
+<span>Protect My Files</span>
+</div>
+</a>
 
-    <section class="feature">
-      <h2>💼 Emergency Number</h2>
-       <a href="dial.html"><button>OPEN....</button>
-    </a>
-    </section>
-  
+<a href="spam-check.html">
+<div class="menu-item">
+<svg fill="none" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10"/>
+<line x1="12" y1="8" x2="12" y2="12"/>
+<circle cx="12" cy="16" r="1"/>
+</svg>
+<span>Check a Link</span>
+</div>
+</a>
 
-<section class="feature">
-      <h2>⚖️ Cyber Law</h2>
-       <a href="aboutlegal.html"><button>OPEN....</button>
-    </a>
-     </section>
+<a href="qr-check.html">
+<div class="menu-item">
+<svg fill="none" stroke-width="2" viewBox="0 0 24 24">
+<rect x="3" y="3" width="7" height="7"/>
+<rect x="14" y="3" width="7" height="7"/>
+<rect x="14" y="14" width="7" height="7"/>
+<rect x="3" y="14" width="7" height="7"/>
+</svg>
+<span>Check a QR Code</span>
+</div>
+</a>
 
-<section class="feature">
-      <h2>? Cyber Doubts</h2>
-       <a href="doubt.html"><button>OPEN....</button>
-    </a>
-     </section>
+<a href="dial.html">
+<div class="menu-item">
+<svg fill="none" stroke-width="2" viewBox="0 0 24 24">
+<path d="M22 16.92V21a1 1 0 0 1-1.11 1
+A19.79 19.79 0 0 1 3 5.11
+A1 1 0 0 1 4 4h4.09
+a1 1 0 0 1 1 .75
+l.7 3.11"/>
+</svg>
+<span>Emergency Help</span>
+</div>
+</a>
 
+<a href="aboutlegal.html">
+<div class="menu-item">
+<svg fill="none" stroke-width="2" viewBox="0 0 24 24">
+<path d="M12 3v18"/>
+<path d="M5 7h14"/>
+<path d="M5 21h14"/>
+</svg>
+<span>Know Your Online Rights</span>
+</div>
+</a>
 
-    <section class="feature">
-      <h2>🧠 Tutorials.. </h2>
-       <a href="video.html"><button>OPEN....</button>
-    </a>
-    </section>
+<a href="doubt.html">
+<div class="menu-item">
+<svg fill="none" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10"/>
+<path d="M9 9a3 3 0 1 1 3 3v2"/>
+</svg>
+<span>Ask a Cyber Question</span>
+</div>
+</a>
 
-    
-<section class="feature">
-      <h2>📋 Feedback</h2>
-       <a href="voc.html"><button>OPEN....</button>
-    </a>
-     </section>
+<a href="voc.html">
+<div class="menu-item">
+<svg fill="none" stroke-width="2" viewBox="0 0 24 24">
+<path d="M21 15a4 4 0 0 1-4 4H7l-4 4V5a2 2 0 0 1 2-2h12"/>
+</svg>
+<span>Give Feedback</span>
+</div>
+</a>
 
-<section class="feature">
-      <h2>📋 About</h2>
-       <a href="https://kavalkaran.onrender.com/main"><button>OPEN....</button>
-    </a>
-     </section>
+<a href="https://kavalkaran.onrender.com/main">
+<div class="menu-item">
+<svg fill="none" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10"/>
+<path d="M12 8v4l3 3"/>
+</svg>
+<span>About Kavalkaran</span>
+</div>
+</a>
 
-</main>
-  <footer>
-    <p>© 2025 KAVALKARAN</p>
-  </footer>
-  
+</div>
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
-  <script type="text/javascript">
+<footer>
+© 2026 Kavalkaran
+</footer>
+
+<script>
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('service-worker.js');
+}
+</script>
+
+<script>
 function googleTranslateElementInit() {
-  new google.translate.TranslateElement(
-    {
-      pageLanguage: 'ml',
-      includedLanguages: 'en,hi,as,bn,brx,doi,gu,kn,ks,gom,mai,ml,mni,mr,ne,or,pa,sa,sat,sd,ta,te,ur',
-      autoDisplay: false,
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    },
-    'google_translate_element'
-  );
+new google.translate.TranslateElement(
+{
+pageLanguage: 'ml',
+includedLanguages: 'en,hi,as,bn,brx,doi,gu,kn,ks,gom,mai,ml,mni,mr,ne,or,pa,sa,sat,sd,ta,te,ur',
+autoDisplay: false,
+layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+},
+'google_translate_element'
+);
 
-  applyLangFromURL();
+applyLangFromURL();
 }
 
-/* 📌 Read ?lang=hi */
 function applyLangFromURL() {
-  const params = new URLSearchParams(window.location.search);
-  const lang = params.get('lang');
 
-  if (!lang) return;
+const params = new URLSearchParams(window.location.search);
+const lang = params.get('lang');
 
-  setTimeout(() => {
-    const select = document.querySelector('.goog-te-combo');
-    if (select) {
-      select.value = lang;
-      select.dispatchEvent(new Event('change'));
-    }
-  }, 1200);
+if (!lang) return;
+
+setTimeout(() => {
+
+const select = document.querySelector('.goog-te-combo');
+
+if (select) {
+select.value = lang;
+select.dispatchEvent(new Event('change'));
 }
+
+},1200);
+
+}
+</script>
+
+<script>
+
+/* Apply language only if ?lang= exists */
+
+function applyLangFromURL() {
+
+const params = new URLSearchParams(window.location.search);
+const lang = params.get('lang');
+
+if (!lang) return;
+
+const interval = setInterval(() => {
+
+const select = document.querySelector('.goog-te-combo');
+
+if (select) {
+
+select.value = lang;
+select.dispatchEvent(new Event('change'));
+
+clearInterval(interval);
+
+}
+
+}, 500);
+
+}
+
 </script>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <div id="google_translate_container"
-     style="
-       position: fixed;
-       top: 14px;
-       right: 14px;
-       z-index: 9999;
-       background: #1e293b;
-       padding: 6px 10px;
-       border-radius: 10px;
-       box-shadow: 0 4px 12px rgba(0,0,0,.35);
-     ">
-  <div id="google_translate_element"></div>
+style="
+position:fixed;
+top:14px;
+right:14px;
+z-index:9999;
+background:#1e293b;
+padding:6px 10px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,.35);
+">
+
+<div id="google_translate_element"></div>
+
 </div>
+
 </body>
 </html>
-
